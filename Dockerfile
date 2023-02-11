@@ -1,4 +1,4 @@
-FROM python:3.11.0-bullseye
+FROM python:3.11.2-bullseye
 
 ENV DJANGO_USER=reinhardt
 ENV PYTHONUNBUFFERED=true
@@ -11,7 +11,6 @@ RUN groupadd -g 1000 ${DJANGO_USER} && \
 
 USER ${DJANGO_USER}
 
-
 RUN pip install pipx && \
-    pipx install yamk==4.3.0 && \
-    pipx install poetry==1.2.2
+    pipx install yamk==4.4.0 && \
+    pipx install poetry==1.3.2
