@@ -12,5 +12,5 @@ RUN groupadd -g 1000 ${DJANGO_USER} && \
 USER ${DJANGO_USER}
 
 RUN pip install pipx && \
-    pipx install yamk==5.0.1 && \
-    pipx install poetry==1.4.2
+    pipx install yamk==5.1.0 && \
+    pipx install poetry==1.5.0
