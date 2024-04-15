@@ -1,16 +1,10 @@
-FROM python:3.11.4-bullseye
+FROM spapanik/fedora-python:1.0.0
 
-ENV DJANGO_USER=reinhardt
-ENV PYTHONUNBUFFERED=true
-ENV PYTHONPYCACHEPREFIX="/home/${DJANGO_USER}/.cache/pycache/"
-ENV PATH="/home/${DJANGO_USER}/.local/bin:${PATH}"
+ENV DJANGO_USER=${PYTHON_USER}
 
-RUN groupadd -g 1000 ${DJANGO_USER} && \
-    useradd -m -u 1000 -g 1000 -s /bin/bash ${DJANGO_USER} && \
-    echo "${DJANGO_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+USER root
+
+RUN dnf --assumeyes --nodocs --setopt install_weak_deps=False install libpq-devel && \
+    dnf --assumeyes clean all
 
 USER ${DJANGO_USER}
-
-RUN pip install pipx && \
-    pipx install yamk==5.2.0 && \
-    pipx install poetry==1.5.1
